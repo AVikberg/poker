@@ -1,5 +1,6 @@
 package com.avikberg.poker.services;
 
+import com.avikberg.poker.models.AnalysisDTO;
 import com.avikberg.poker.models.Card;
 import com.avikberg.poker.models.Hand;
 import com.avikberg.poker.models.HandDTO;
@@ -28,6 +29,12 @@ public class HandServiceImpl implements HandService {
     @Override
     public Optional<HandDTO> getHandById(Long id) {
         return handRepository.findById(id).map(this::convertToDTO);
+    }
+
+    @Override
+    public Optional<AnalysisDTO> getHandAnalysisById(Long id) {
+        Optional<Hand> hand = handRepository.findById(id);
+        return hand.map(value -> Optional.ofNullable(value.findCategory())).orElse(null);
     }
 
     @Override
