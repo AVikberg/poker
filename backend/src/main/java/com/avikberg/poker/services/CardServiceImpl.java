@@ -2,7 +2,6 @@ package com.avikberg.poker.services;
 
 import com.avikberg.poker.models.Card;
 import com.avikberg.poker.models.CardDTO;
-import com.avikberg.poker.models.Hand;
 import com.avikberg.poker.repositories.CardRepository;
 import org.springframework.stereotype.Service;
 
