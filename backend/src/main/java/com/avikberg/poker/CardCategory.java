@@ -5,8 +5,10 @@ public enum CardCategory {
     OnePair(1, "One pair"),
     TwoPair(2, "Two pairs"),
     ThreeOfAKind(3, "Three of a kind"),
-    FullHouse(4, "Full house"),
-    FourOfAKind(5, "Four of a kind");
+    Flush(4, "Flush"),
+    FullHouse(5, "Full house"),
+    FourOfAKind(6, "Four of a kind"),
+    StraightFlush(7, "StraightFlush");
 
     private final Integer value;
     private final String name;
