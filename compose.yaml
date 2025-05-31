@@ -1,4 +1,20 @@
 services:
+  server:
+    build:
+      context: backend
+    container_name: server
+    depends_on:
+      - postgres
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=secret
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/mydatabase
+      - SPRING_DATASOURCE_USERNAME=myuser
+      - SPRING_DATASOURCE_PASSWORD=secret
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - '8080:8080'
+
   postgres:
     image: 'postgres:latest'
     restart: always
@@ -9,7 +25,7 @@ services:
     ports:
       - '5432'
     volumes:
-     - db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
 
 volumes:
   db-data:
