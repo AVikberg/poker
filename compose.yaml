@@ -14,6 +14,15 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     ports:
       - '8080:8080'
+  frontend:
+    build:
+      context: frontend
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - './frontend:/app'
+      - '/app/node_modules'
 
   postgres:
     image: 'postgres:latest'
