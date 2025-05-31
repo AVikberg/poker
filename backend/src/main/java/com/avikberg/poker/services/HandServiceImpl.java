@@ -38,6 +38,11 @@ public class HandServiceImpl implements HandService {
     }
 
     @Override
+    public List<Hand> getHandsByIds(List<Long> ids) {
+        return handRepository.findByIdIn(ids);
+    }
+
+    @Override
     public HandDTO saveHand(Hand hand) {
         Hand savedHand = handRepository.save(hand);
         return convertToDTO(savedHand);

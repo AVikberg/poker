@@ -28,6 +28,11 @@ public class Hand {
     public void setCards(List<Card> cards) { this.cards = cards; }
 
 
+    public String getCardsString() {
+        List<String> cardStrings = cards.stream().map(Card::toString).toList();
+        return String.join(", ", cardStrings);
+    }
+
 
     private Map<String, List<Card>> groupByValue() {
         return cards.stream().collect(groupingBy(Card::getValue));

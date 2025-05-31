@@ -11,6 +11,7 @@ public interface HandService {
     List<HandDTO> getAllHands();
     Optional<HandDTO> getHandById(Long id);
     Optional<AnalysisDTO> getHandAnalysisById(Long id);
+    List<Hand> getHandsByIds(List<Long> ids);
     HandDTO saveHand(Hand hand);
     HandDTO saveHand(HandDTO handDTO);
     HandDTO updateHand(Long id, HandDTO handDTO);

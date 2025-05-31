@@ -36,6 +36,32 @@ public class PokerController {
         return analysis.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/compare")
+    public String compareHands(@RequestParam List<Long> ids) {
+        List<Hand> hands = handService.getHandsByIds(ids);
+
+        Hand best = hands.get(0);
+
+        for (Hand hand : hands) {
+            AnalysisDTO analysis = hand.findCategory();
+            AnalysisDTO bestAnalysis = best.findCategory();
+            if (analysis.category().getValue() > bestAnalysis.category().getValue()) {
+                best = hand;
+                continue;
+            }
+            if (analysis.category().getValue().equals(bestAnalysis.category().getValue())
+                && analysis.highestInCategory() > bestAnalysis.highestInCategory()) {
+                best = hand;
+            }
+        }
+
+        return String.format(
+            "Best hand being played was id %s (cards: %s, %s)",
+            best.getId(), best.getCardsString(),
+            best.findCategory().category().getName().toLowerCase()
+        );
+    }
+
     @PostMapping
     public AnalysisDTO createHand() {
         List<Card> stock = (new Stock()).getCards();
