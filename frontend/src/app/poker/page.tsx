@@ -20,21 +20,22 @@ const HandComp = (hand: PokerHand) => {
   }
 
   return (
-    <div key={hand.id} className="flex items-center">
-      <div className="p-2 align-middle">
+    <a key={hand.id} className="flex items-center bg-slate-700 rounded-xl p-2"
+      href={`poker/hand/${hand.id}`}>
+      <div className="align-middle pr-2">
         Hand {hand.id}
       </div>
-      <div className="flex gap-2 my-2">
+      <div className="flex gap-2">
         {hand.cards.map((card: PokerCard) => (
           <div
             key={card.id}
             className={`bg-white rounded-md ${TextColor(card.color)} w-12 h-18 p-2`}
           >
-            {card.value}{ColorToSymbol(card.color)}
+            {card.value.toUpperCase()}{ColorToSymbol(card.color)}
           </div>
         ))}
       </div>
-    </div>
+    </a>
   );
 }
 
@@ -43,27 +44,27 @@ export default async function Poker() {
   const hands: PokerHand[] = await data.json();
 
   return (
-    <div>
+    <div className="container px-4">
       <h1 className="text-2xl my-4">Poker</h1>
       <div className="flex gap-4">
         <div className="flex-none">
-          <div>
+          <div className="mb-1">
             Poker hands:
           </div>
-          <ul>
+          <div className="flex flex-col flex-wrap gap-2" style={{maxHeight: "50%"}}>
             {hands.map((hand: PokerHand) => (
               HandComp(hand)
             ))}
-          </ul>
+          </div>
         </div>
-        <div>
+        {/* <div>
           <button className="rounded-full bg-green-600 p-4">
             Create new hand
           </button>
         </div>
         <div>
           Compare cards here
-        </div>
+        </div> */}
       </div>
     </div>
   );
