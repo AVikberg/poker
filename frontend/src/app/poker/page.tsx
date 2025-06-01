@@ -45,7 +45,7 @@ export default async function Poker() {
   return (
     <div>
       <h1 className="text-2xl my-4">Poker</h1>
-      <div className="flex">
+      <div className="flex gap-4">
         <div className="flex-none">
           <div>
             Poker hands:
@@ -55,9 +55,11 @@ export default async function Poker() {
               HandComp(hand)
             ))}
           </ul>
-          <div>
-            Generate new hand here
-          </div>
+        </div>
+        <div>
+          <button className="rounded-full bg-green-600 p-4">
+            Create new hand
+          </button>
         </div>
         <div>
           Compare cards here
