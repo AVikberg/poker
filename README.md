@@ -1,5 +1,12 @@
 # Poker
 
+## Frontend
+
+Open [http://localhost/poker](http://localhost/poker) to see a list of already-created cards.
+
+Open [http://localhost/poker/hand/{id}](http://localhost/poker/hand/1)
+to open directly to the analysis page of a poker hand.
+
 ## Endpoints
 
 ### GET `/hands`
