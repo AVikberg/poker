@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +49,34 @@ public class Hand {
         int highestPair = 0;
         int highestThreeOfAKind = 0;
         int highestFourOfAKind = 0;
-        int highestInCategory = 0;
+        int highestInCategory;
+
+        List<Card> orderedCards = new ArrayList<>(List.copyOf(cards));
+        orderedCards.sort(Comparator.comparing(Card::valueToInt));
+        int highestFlush = orderedCards.get(4).valueToInt();
+
+        // Check for flush
+        String color = cards.get(0).getColor();
+        boolean flush = true;
+        for (Card card : cards) {
+            if (!card.getColor().equals(color)) {
+                flush = false;
+                break;
+            }
+        }
+
+        Card previous = orderedCards.get(0);
+        boolean straight = true;
+        for (Card card : orderedCards) {
+            if (card == previous) {
+                continue;
+            }
+            if (card.valueToInt() != previous.valueToInt() + 1) {
+                straight = false;
+                break;
+            }
+            previous = card;
+        }
 
         for (Map.Entry<String, List<Card>> kv : groupByValue().entrySet()) {
             if (kv.getValue().size() == 2) {
@@ -89,7 +118,13 @@ public class Hand {
 
         CardCategory category;
 
-        if (fourOfAKind > 0) {
+        if (flush && straight) {
+            category = CardCategory.StraightFlush;
+            highestInCategory = highestFlush;
+        } else if (flush) {
+            category = CardCategory.Flush;
+            highestInCategory = highestFlush;
+        } else if (fourOfAKind > 0) {
             category = CardCategory.FourOfAKind;
             highestInCategory = highestFourOfAKind;
         } else if (threeOfAKind > 0 && pairs > 0) {

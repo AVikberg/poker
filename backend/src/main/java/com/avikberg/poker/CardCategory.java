@@ -8,7 +8,7 @@ public enum CardCategory {
     Flush(4, "Flush"),
     FullHouse(5, "Full house"),
     FourOfAKind(6, "Four of a kind"),
-    StraightFlush(7, "StraightFlush");
+    StraightFlush(7, "Straight Flush");
 
     private final Integer value;
     private final String name;
