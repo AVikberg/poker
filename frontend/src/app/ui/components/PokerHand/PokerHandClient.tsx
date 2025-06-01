@@ -32,7 +32,7 @@ const HandComp = (hand: PokerHand) => {
             key={card.id}
             className={`bg-white rounded-md ${TextColor(card.color)} w-12 h-18 p-2`}
           >
-            {card.value.toUpperCase()}{ColorToSymbol(card.color)}
+            {card.value == "t" ? 10 : card.value.toUpperCase()}{ColorToSymbol(card.color)}
           </div>
         ))}
       </div>
