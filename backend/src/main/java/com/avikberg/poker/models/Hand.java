@@ -109,11 +109,9 @@ public class Hand {
             highestInCategory = highestCard;
         }
 
-        List<String> cardStrings = cards.stream().map(Card::toString).toList();
-
         return new AnalysisDTO(
             id,
-            String.join(", ", cardStrings),
+            cards,
             category,
             highestInCategory
         );
