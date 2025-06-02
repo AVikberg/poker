@@ -1,5 +1,5 @@
 import { revalidatePath } from "next/cache";
-import { PokerAnalysis } from "../ui/components/PokerHand/types";
+import { PokerAnalysis } from "./ui/components/PokerHand/types";
 
 export const BASE_URL = "http://server:8080";
 

@@ -22,7 +22,7 @@ const HandComp = (hand: PokerHand) => {
 
   return (
     <a key={hand.id} className="flex items-center bg-slate-700 rounded-xl p-2"
-      href={`poker/hand/${hand.id}`}>
+      href={`hand/${hand.id}`}>
       <div className="align-middle pr-2">
         Hand {hand.id}
       </div>
